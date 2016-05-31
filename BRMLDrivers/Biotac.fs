@@ -251,7 +251,7 @@ module Biotac =
                 acquisitionEnabled <- false
                 acquisitionThread.Join()
 
-        interface Datasets.RecorderTypes.ISensor<BioTacValueT []> with
+        interface SampleRecorder.RecorderTypes.ISensor<BioTacValueT []> with
             member this.DataType = typeof<BioTacValueT []>
             member this.SampleAcquired =
                 this.SampleAcquired

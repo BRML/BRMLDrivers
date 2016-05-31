@@ -1,4 +1,4 @@
-﻿namespace Datasets
+﻿namespace SampleRecorder
 
 open System
 open System.Diagnostics

@@ -7,7 +7,7 @@ open System.Diagnostics
 open System.Threading
 open System.Timers
 
-open Datasets
+open SampleRecorder
 
 
 let conv<'T> (value: obj) : 'T =
