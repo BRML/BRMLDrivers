@@ -82,7 +82,7 @@
       
   environment:
     access_token:
-      secure: BB
+      secure: sYYME1QZttslL5Y8AaU91t3tuB2tDGj82Df7vD07t19TAbxKVbi3Y+FOnrOpqfis
 
   before_build:
     - nuget restore BRMLDrivers.sln -Verbosity quiet
