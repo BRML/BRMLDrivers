@@ -11,9 +11,9 @@
 // (This is the original behaviour of ProjectScaffold prior to multi project support)
 let referenceBinaries = ["BRMLDrivers.dll"; ]
 // Web site location for the generated documentation
-let website = "http://www.deepml.net"
+let website = "https://brml.github.io/BRMLDrivers/"
 
-let githubLink = "http://github.com/DeepMLNet/DeepNet"
+let githubLink = "http://github.com/BRML/BRMLDrivers"
 
 // Specify more information about your project
 let info =
