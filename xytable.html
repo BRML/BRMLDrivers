@@ -65,11 +65,11 @@
     <span class="i">PortBaud</span>       <span class="o">=</span> <span class="n">115200</span>
     <span class="i">X</span>              <span class="o">=</span> { <span class="i">StepperConfig</span> <span class="o">=</span> {<span class="i">Id</span><span class="o">=</span><span class="n">1</span>; <span class="i">AnglePerStep</span><span class="o">=</span><span class="n">1.8</span>; <span class="i">StepMode</span><span class="o">=</span><span class="n">8</span>; <span class="i">StartVel</span><span class="o">=</span><span class="n">1000.</span>}
                        <span class="i">DegPerMM</span>      <span class="o">=</span> <span class="n">360.</span> <span class="o">/</span> <span class="n">1.25</span>
-                       <span class="i">Home</span>          <span class="o">=</span> <span class="i">Stepper</span><span class="o">.</span><span class="i">Right</span>
+                       <span class="i">Home</span>          <span class="o">=</span> <span class="i">StepperCfg</span><span class="o">.</span><span class="i">Right</span>
                        <span class="i">MaxPos</span>        <span class="o">=</span> <span class="n">147.</span> }
     <span class="i">Y</span>              <span class="o">=</span> { <span class="i">StepperConfig</span> <span class="o">=</span> {<span class="i">Id</span><span class="o">=</span><span class="n">2</span>; <span class="i">AnglePerStep</span><span class="o">=</span><span class="n">1.8</span>; <span class="i">StepMode</span><span class="o">=</span><span class="n">8</span>; <span class="i">StartVel</span><span class="o">=</span><span class="n">1000.</span>}
                        <span class="i">DegPerMM</span>      <span class="o">=</span> <span class="n">360.</span> <span class="o">/</span> <span class="n">1.25</span>
-                       <span class="i">Home</span>          <span class="o">=</span> <span class="i">Stepper</span><span class="o">.</span><span class="i">Left</span>
+                       <span class="i">Home</span>          <span class="o">=</span> <span class="i">StepperCfg</span><span class="o">.</span><span class="i">Left</span>
                        <span class="i">MaxPos</span>        <span class="o">=</span> <span class="n">140.</span> }
     <span class="i">DefaultVel</span>     <span class="o">=</span> <span class="n">30.</span>
     <span class="i">DefaultAccel</span>   <span class="o">=</span> <span class="n">30.</span>
@@ -86,7 +86,7 @@ They are described as follows.
 <code>StepMode</code> is the stepping mode of the motor.
 <code>StartVel</code> is the initial velocity when starting the motor in steps per second.
 <code>DegPerMM</code> is how many degrees the motor must turn to move the table by <span class="math">\(1\mathrm{mm}\)</span>.
-<code>Home</code> is the direction of the reference switch and can be <code>Stepper.Left</code> or <code>Stepper.Right</code>.
+<code>Home</code> is the direction of the reference switch and can be <code>StepperCfg.Left</code> or <code>StepperCfg.Right</code>.
 <code>MaxPos</code> is the maximum reachable position in <span class="math">\(\mathrm{mm}\)</span>.
 <code>DefaultVel</code> is the default movement velocity in <span class="math">\(\mathrm{mm}/\mathrm{s}\)</span>.
 <code>DefaultAccel</code> is the default acceleration and deceleration in <span class="math">\(\mathrm{mm} / \mathrm{s}^2\)</span>.
@@ -101,7 +101,9 @@ They are described as follows.
 </table>
 <p>Initialization and checking of communication is performed automatically.
 After initialization the driver starts to stream position samples from the XY table.</p>
-<p>All driver instance methods return an <code>Async&lt;_&gt;</code> instance.
+<p>The driver has overshoot protection and will stop the XY table and terminate the program, if the position of any axis goes below 0 or above <code>MaxPos</code> specified in the configuration.
+Nevertheless, program and computer crashes can cause a dangerous situation; see the caution below.</p>
+<p>The <code>tbl.Home</code> and <code>tbl.DriveTo</code> instance methods return an <code>Async&lt;_&gt;</code> instance.
 You can perform <a href="https://fsharpforfunandprofit.com/posts/concurrency-async-and-parallel/">asynchronous control</a> or pipe all results into the <code>Async.RunSynchronously</code> to perform immediate command execution and wait for the operation to finish before your program continues.</p>
 <h2><a name="Homing" class="anchor" href="#Homing">Homing</a></h2>
 <p>The XY table must be homed (finding the zero reference positions) before it can be moved.
@@ -142,7 +144,7 @@ This is the recommended method if you want to record the position of the XY tabl
 <p>To move to a target position with a fixed velocity and linear acceleration and deceleration ramps use the <code>tbl.DriveTo</code> method.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 23)" onmouseover="showTip(event, 'fs2', 23)" class="i">tbl</span><span class="o">.</span><span class="i">DriveTo</span> ((<span class="n">50.</span> <span class="c">(* mm *)</span>, <span class="n">80.</span> <span class="c">(* mm *)</span>))
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 23)" onmouseover="showTip(event, 'fs2', 23)" class="i">tbl</span><span class="o">.</span><span class="i">DriveTo</span> ((<span class="n">50.</span> <span class="c">(* mm *)</span>, <span class="n">80.</span> <span class="c">(* mm *)</span>)) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 24)" onmouseover="showTip(event, 'fs3', 24)" class="t">Async</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 25)" onmouseover="showTip(event, 'fs4', 25)" class="f">RunSynchronously</span>
 </code></pre></td>
 </tr>
 </table>
@@ -150,18 +152,55 @@ This is the recommended method if you want to record the position of the XY tabl
 <p>You can specify additional arguments for the movement velocity, acceleration and deceleration.
 If they are omitted, the default values from the configuration are used.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 24)" onmouseover="showTip(event, 'fs2', 24)" class="i">tbl</span><span class="o">.</span><span class="i">DriveTo</span> ((<span class="n">10.</span> <span class="c">(* mm *)</span>, <span class="n">10.</span> <span class="c">(* mm *)</span>), (<span class="n">5.</span> <span class="c">(* mm/s *)</span>, <span class="n">5.</span> <span class="c">(* mm/s *)</span>), (<span class="n">10.</span> <span class="c">(* mm/s^2 *)</span>, <span class="n">10.</span> <span class="c">(* mm/s^2 *)</span>))
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 26)" onmouseover="showTip(event, 'fs2', 26)" class="i">tbl</span><span class="o">.</span><span class="i">DriveTo</span> ((<span class="n">10.</span> <span class="c">(* mm *)</span>, <span class="n">10.</span> <span class="c">(* mm *)</span>), (<span class="n">5.</span> <span class="c">(* mm/s *)</span>, <span class="n">5.</span> <span class="c">(* mm/s *)</span>), (<span class="n">10.</span> <span class="c">(* mm/s^2 *)</span>, <span class="n">10.</span> <span class="c">(* mm/s^2 *)</span>)) 
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 27)" onmouseover="showTip(event, 'fs3', 27)" class="t">Async</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 28)" onmouseover="showTip(event, 'fs4', 28)" class="f">RunSynchronously</span>
 </code></pre></td>
 </tr>
 </table>
 <h2><a name="Moving-with-a-set-velocity" class="anchor" href="#Moving-with-a-set-velocity">Moving with a set velocity</a></h2>
-<p>It is also possible to directly control the movement velocity of the XY table.</p>
+<p>It is also possible to control the movement velocity of the XY table directly.
+This may be useful when the XY table is to be controlled in a closed loop mode of a larger system.</p>
+<p>To enable direct velocity control call the <code>tbl.DriveWithVel</code> method with the desired velocity in <span class="math">\(\mathrm{mm}/\mathrm{s}\)</span> as argument.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 29)" onmouseover="showTip(event, 'fs2', 29)" class="i">tbl</span><span class="o">.</span><span class="i">DriveWithVel</span> ((<span class="n">3.</span> <span class="c">(* mm/s *)</span>, <span class="n">5.</span> <span class="c">(* mm/s *)</span>))
+</code></pre></td>
+</tr>
+</table>
+<p>hide *</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs3', 30)" onmouseover="showTip(event, 'fs3', 30)" class="t">Async</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 31)" onmouseover="showTip(event, 'fs12', 31)" class="f">Sleep</span> <span class="n">1000</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs3', 32)" onmouseover="showTip(event, 'fs3', 32)" class="t">Async</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs4', 33)" onmouseover="showTip(event, 'fs4', 33)" class="f">RunSynchronously</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Contrary to the rest of the driver interface, this method returns immediately with a unit return type.
+It does not wait for the XY table to reach the specified velocity.</p>
+<p><strong>CAUTION: If the program crashes in a disadvantageous way or the whole computer crashes or the communication is lost, <em>the XY table will continue to move</em> with the last set velocity and <em>crash into the stop</em>. The only way to stop it in such a situation, is to cut the power of the motor driver.</strong></p>
+<p>The movement velocity can be adjusted at any time by calling <code>tbl.DriveWithVel</code> again with the new velocity.
+Use negative velocities to reverse the movement direction.
+You can optionally specify an acceleration that should be used to acquire the new velocity.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 34)" onmouseover="showTip(event, 'fs2', 34)" class="i">tbl</span><span class="o">.</span><span class="i">DriveWithVel</span> ((<span class="o">-</span><span class="n">10.</span> <span class="c">(* mm/s *)</span>, <span class="o">-</span><span class="n">20.</span> <span class="c">(* mm/s *)</span>), (<span class="n">7.</span> <span class="c">(* mm/s^2 *)</span>, <span class="n">7.</span> <span class="c">(* mm/s^2 *)</span>))
+</code></pre></td>
+</tr>
+</table>
+<p>To stop the table call the <code>tbl.Stop</code> method, optionally specifying the deceleration.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 35)" onmouseover="showTip(event, 'fs2', 35)" class="i">tbl</span><span class="o">.</span><span class="i">Stop</span> ()
+</code></pre></td>
+</tr>
+</table>
+<p>The method does not block until the XY table has stopped.</p>
 <h2><a name="Disposing" class="anchor" href="#Disposing">Disposing</a></h2>
 <p>Dispose the driver instance after usage.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//tbl.Dispose ()</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs2', 36)" onmouseover="showTip(event, 'fs2', 36)" class="i">tbl</span><span class="o">.</span><span class="i">Dispose</span> ()
 </code></pre></td>
 </tr>
 </table>
@@ -178,6 +217,7 @@ If they are omitted, the default values from the configuration are used.</p>
 <div class="tip" id="fs9">namespace System.Threading</div>
 <div class="tip" id="fs10">Multiple items<br />type Thread =<br />&#160;&#160;inherit CriticalFinalizerObject<br />&#160;&#160;new : start:ThreadStart -&gt; Thread + 3 overloads<br />&#160;&#160;member Abort : unit -&gt; unit + 1 overload<br />&#160;&#160;member ApartmentState : ApartmentState with get, set<br />&#160;&#160;member CurrentCulture : CultureInfo with get, set<br />&#160;&#160;member CurrentUICulture : CultureInfo with get, set<br />&#160;&#160;member DisableComObjectEagerCleanup : unit -&gt; unit<br />&#160;&#160;member ExecutionContext : ExecutionContext<br />&#160;&#160;member GetApartmentState : unit -&gt; ApartmentState<br />&#160;&#160;member GetCompressedStack : unit -&gt; CompressedStack<br />&#160;&#160;member GetHashCode : unit -&gt; int<br />&#160;&#160;...<br /><br />Full name: System.Threading.Thread<br /><br />--------------------<br />System.Threading.Thread(start: System.Threading.ThreadStart) : unit<br />System.Threading.Thread(start: System.Threading.ParameterizedThreadStart) : unit<br />System.Threading.Thread(start: System.Threading.ThreadStart, maxStackSize: int) : unit<br />System.Threading.Thread(start: System.Threading.ParameterizedThreadStart, maxStackSize: int) : unit</div>
 <div class="tip" id="fs11">System.Threading.Thread.Sleep(timeout: System.TimeSpan) : unit<br />System.Threading.Thread.Sleep(millisecondsTimeout: int) : unit</div>
+<div class="tip" id="fs12">static member Async.Sleep : millisecondsDueTime:int -&gt; Async&lt;unit&gt;</div>
 
         </div>
         <div class="span3">

@@ -44,6 +44,8 @@
   <span>Parent Module: <a href="brml-drivers-xytable.html">XYTable</a></span>
 </p>
 <div class="xmldoc">
+<p>Driver for Movtec XY table.</p>
+
 </div>
   <h3>Constructors</h3>
   <table class="table table-bordered member-list">
@@ -54,15 +56,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '88', 88)" onmouseover="showTip(event, '88', 88)">
+          <code onmouseout="hideTip(event, '47', 47)" onmouseover="showTip(event, '47', 47)">
             new(config)
           </code>
-          <div class="tip" id="88">
+          <div class="tip" id="47">
             <strong>Signature:</strong> config:XYTableConfigT -&gt; XYTableT<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L282-282" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L312-312" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -81,106 +83,143 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '89', 89)" onmouseover="showTip(event, '89', 89)">
+          <code onmouseout="hideTip(event, '48', 48)" onmouseover="showTip(event, '48', 48)">
             CurrentPos
           </code>
-          <div class="tip" id="89">
+          <div class="tip" id="48">
             <strong>Signature:</strong> float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L598-598" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L629-629" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>The latest available position.</p>
+
+
               <p>CompiledName: <code>get_CurrentPos</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '90', 90)" onmouseover="showTip(event, '90', 90)">
+          <code onmouseout="hideTip(event, '49', 49)" onmouseover="showTip(event, '49', 49)">
+            Dispose()
+          </code>
+          <div class="tip" id="49">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L696-696" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Stops the table, releases the serial port and disposes the
+driver instance.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '50', 50)" onmouseover="showTip(event, '50', 50)">
             DriveTo(pos, vel, accel, decel)
           </code>
-          <div class="tip" id="90">
+          <div class="tip" id="50">
             <strong>Signature:</strong> (pos:XYTupleT * vel:(float * float) option * accel:(float * float) option * decel:(float * float) option) -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L610-610" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L647-647" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Drives to the specified position.
+Optionally drive velocity, acceleration and deceleration can be specified.
+Acceleration and deceleration is performed using a linear ramp.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '91', 91)" onmouseover="showTip(event, '91', 91)">
+          <code onmouseout="hideTip(event, '51', 51)" onmouseover="showTip(event, '51', 51)">
             DriveWithVel(vel, accel)
           </code>
-          <div class="tip" id="91">
+          <div class="tip" id="51">
             <strong>Signature:</strong> (vel:XYTupleT * accel:(float * float) option) -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L616-616" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L658-658" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Starts driving with the specified velocity.
+Use negative velocities to move in the opposite direction.
+The acceleration is performed linearly to the target velocity.
+This method may be called repetitively (without stopping the table in-between)
+to adjust the movement velocity.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '92', 92)" onmouseover="showTip(event, '92', 92)">
+          <code onmouseout="hideTip(event, '52', 52)" onmouseover="showTip(event, '52', 52)">
             GetNextPos()
           </code>
-          <div class="tip" id="92">
+          <div class="tip" id="52">
             <strong>Signature:</strong> unit -&gt; XYTupleT<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L604-604" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L637-637" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Waits for the next position sample and returns it.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
+          <code onmouseout="hideTip(event, '53', 53)" onmouseover="showTip(event, '53', 53)">
             Home()
           </code>
-          <div class="tip" id="93">
+          <div class="tip" id="53">
             <strong>Signature:</strong> unit -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L607-607" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L641-641" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Homes the XY table, if it is currently not homed.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
+          <code onmouseout="hideTip(event, '54', 54)" onmouseover="showTip(event, '54', 54)">
             OptimalVelToPos(tPos, maxVel, maxAccel)
           </code>
-          <div class="tip" id="94">
+          <div class="tip" id="54">
             <strong>Signature:</strong> (tPos:(float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;) * maxVel:float option * maxAccel:float option) -&gt; float * float<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L641-641" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L685-685" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -193,76 +232,84 @@ with the specified maximum velocity and acceleration.</p>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
+          <code onmouseout="hideTip(event, '55', 55)" onmouseover="showTip(event, '55', 55)">
             PosAcquired
           </code>
-          <div class="tip" id="95">
+          <div class="tip" id="55">
             <strong>Signature:</strong> IEvent&lt;XYTupleT&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L602-602" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L634-634" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>This event is raised, when a new position sample is acquired.</p>
+
+
               <p>CompiledName: <code>get_PosAcquired</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
+          <code onmouseout="hideTip(event, '56', 56)" onmouseover="showTip(event, '56', 56)">
             PosReportInterval()
           </code>
-          <div class="tip" id="96">
+          <div class="tip" id="56">
             <strong>Signature:</strong> unit -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L626-626" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L670-670" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Position reporting interval in ms.</p>
+
+
               <p>CompiledName: <code>set_PosReportInterval</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
+          <code onmouseout="hideTip(event, '57', 57)" onmouseover="showTip(event, '57', 57)">
             PosReportInterval()
           </code>
-          <div class="tip" id="97">
+          <div class="tip" id="57">
             <strong>Signature:</strong> unit -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L625-625" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L669-669" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Position reporting interval in ms.</p>
+
+
               <p>CompiledName: <code>get_PosReportInterval</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '98', 98)" onmouseover="showTip(event, '98', 98)">
-            Stop(accel)
+          <code onmouseout="hideTip(event, '58', 58)" onmouseover="showTip(event, '58', 58)">
+            Stop(decel)
           </code>
-          <div class="tip" id="98">
-            <strong>Signature:</strong> (accel:(float * float) option) -&gt; unit<br />
+          <div class="tip" id="58">
+            <strong>Signature:</strong> (decel:(float * float) option) -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L620-620" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L663-663" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Stops the XY table with the optionally specified deceleration.</p>
+
+
         </td>
       </tr>
     </tbody>
