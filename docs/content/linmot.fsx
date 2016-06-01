@@ -37,7 +37,7 @@ Instantiating the driver requires providing a configuration record of type `BRML
 *)
 open BRML.Drivers
 
-let cfg = {
+let cfg : LinmotCfgT = {
     PortName       = "COM6"    // adjust
     PortBaud       = 57600     // adjust
     Id             = 0x11      // adjust

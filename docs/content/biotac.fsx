@@ -20,7 +20,7 @@ Instantiating the driver requires providing a configuration record of type `BRML
 *)
 open BRML.Drivers
 
-let cfg = {
+let cfg : BioTacCfgT = {
     Cheetah        = uint32 1364033083   // adjust
     Index          = 0                   // adjust
 }
