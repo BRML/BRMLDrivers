@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Deep.Net
+    <title>BRML Drivers and Data Recorder
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="BRML Instrument Drivers"/>
@@ -36,18 +36,23 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Deep-Net" class="anchor" href="#Deep-Net">Deep.Net</a></h1>
-<p>Deep learning library for F#. Provides symbolic model differentiation, automatic differentiation and compilation to CUDA GPUs.
-It includes optimizers and model blocks used in deep learning.</p>
-<p>The Deep.Net library can be <a href="https://nuget.org/packages/DeepNet">installed from NuGet</a>.</p>
+<h1><a name="BRML-Drivers-and-Data-Recorder" class="anchor" href="#BRML-Drivers-and-Data-Recorder">BRML Drivers and Data Recorder</a></h1>
+<p>This F# library contains drivers for lab equipment and self-built robots at BRML labs.
+It also contains a generic sample recorder class for obtaining time-synchronized samples from arbitrary sensors.</p>
+<p>Currently the following hardware is supported:</p>
+<ul>
+<li><a href="http://www.linmot.com/products/linear-motors/">Linmot</a> using the <a href="http://www.linmot.com/fileadmin/user_upload/Downloads/software-firmware/servo-drives/linmot-talk-6/Usermanual_LinRS_e_recent.pdf">LinRS serial protocol</a></li>
+<li><a href="http://www.movtec.de/positioniersysteme/2-achsen-system.html">Movtec Wacht XY-table</a> using <a href="http://en.nanotec.com/products/1034-smci33-stepper-motor-controller-with-closed-loop-controller/">Nanotec stepper motor controller SMCI33</a> or compatible serial interface</li>
+<li><a href="http://www.syntouchllc.com/Products/BioTac-SP/">Syntouch BioTac SP sensor</a> using a <a href="http://www.totalphase.com/products/cheetah-spi/">Cheetah SPI USB adapter</a></li>
+</ul>
 <h2><a name="Contributing-and-copyright" class="anchor" href="#Contributing-and-copyright">Contributing and copyright</a></h2>
-<p>The project is hosted on <a href="https://github.com/DeepMLNet/DeepNet">GitHub</a> where you can <a href="https://github.com/DeepMLNet/DeepNet/issues">report issues</a>, fork the project and submit pull requests.
-The library is available under the <a href="https://github.com/DeepMLNet/DeepNet/blob/master/LICENSE">Apache License 2.0</a>, which allows modification and redistribution for both commercial and non-commercial purposes.</p>
+<p>The project is hosted on <a href="https://github.com/BRML/BRMLDrivers">GitHub</a> where you can <a href="https://github.com/BRML/BRMLDrivers/issues">report issues</a>, fork the project and submit pull requests.
+The library is available under the <a href="https://github.com//BRML/BRMLDrivers/blob/master/LICENSE">Apache License 2.0</a>, which allows modification and redistribution for both commercial and non-commercial purposes.</p>
 
 
         </div>
         <div class="span3">
-          <!-- <img src="https://brml.github.io/BRMLDrivers//img/logo.png" alt="Deep.Net logo" style="width:150px;margin:10px" /> -->  
+          <!-- <img src="https://brml.github.io/BRMLDrivers//img/logo.png" alt="BRML Drivers logo" style="width:150px;margin:10px" /> -->  
           <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
             <li class="nav-header">BRML Drivers</li>
             <li><a href="https://brml.github.io/BRMLDrivers//index.html">Home page</a></li>
@@ -56,9 +61,13 @@ The library is available under the <a href="https://github.com/DeepMLNet/DeepNet
             <li><a href="http://github.com/BRML/BRMLDrivers">Source Code on GitHub</a></li>
             <li><a href="https://brml.github.io/BRMLDrivers//release-notes.html">Release Notes</a></li>
             
-            <li class="nav-header">Getting started</li>
-            <li><a href="https://brml.github.io/BRMLDrivers//tensor.html">Working with Tensors</a></li>
-            <li><a href="https://brml.github.io/BRMLDrivers//mnist.html">Learning MNIST</a></li>
+            <li class="nav-header">Data Recorder</li>
+            <li><a href="https://brml.github.io/BRMLDrivers//recorder-usage.html">Usage</a></li>
+
+            <li class="nav-header">Instrument Drivers</li>
+            <li><a href="https://brml.github.io/BRMLDrivers//linmot.html">Linmot</a></li>
+            <li><a href="https://brml.github.io/BRMLDrivers//xytable.html">XY table</a></li>
+            <li><a href="https://brml.github.io/BRMLDrivers//biotac.html">BioTac SP</a></li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="https://brml.github.io/BRMLDrivers//reference/index.html">API Reference</a></li>

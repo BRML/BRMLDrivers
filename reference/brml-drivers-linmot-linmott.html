@@ -44,6 +44,9 @@
   <span>Parent Module: <a href="brml-drivers-linmot.html">Linmot</a></span>
 </p>
 <div class="xmldoc">
+<p>Linmot driver.
+The driver is fully thread-safe.</p>
+
 </div>
   <h3>Constructors</h3>
   <table class="table table-bordered member-list">
@@ -54,15 +57,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '73', 73)" onmouseover="showTip(event, '73', 73)">
+          <code onmouseout="hideTip(event, '56', 56)" onmouseover="showTip(event, '56', 56)">
             new(config)
           </code>
-          <div class="tip" id="73">
+          <div class="tip" id="56">
             <strong>Signature:</strong> config:LinmotCfgT -&gt; LinmotT<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L266-266" class="github-link">
+            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L275-275" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -81,74 +84,104 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '74', 74)" onmouseover="showTip(event, '74', 74)">
+          <code onmouseout="hideTip(event, '57', 57)" onmouseover="showTip(event, '57', 57)">
+            Dispose()
+          </code>
+          <div class="tip" id="57">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L388-388" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Dispose the driver and close the serial port.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '58', 58)" onmouseover="showTip(event, '58', 58)">
             DriveTo(pos, vel, accel, decel)
           </code>
-          <div class="tip" id="74">
+          <div class="tip" id="58">
             <strong>Signature:</strong> (pos:float * vel:float option * accel:float option * decel:float option) -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L364-364" class="github-link">
+            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L378-378" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Drives to the specified position with the specified velocity
+using the specified linear acceleration and deceleration.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '75', 75)" onmouseover="showTip(event, '75', 75)">
+          <code onmouseout="hideTip(event, '59', 59)" onmouseover="showTip(event, '59', 59)">
             Home(force)
           </code>
-          <div class="tip" id="75">
+          <div class="tip" id="59">
             <strong>Signature:</strong> (force:bool option) -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L360-360" class="github-link">
+            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L372-372" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Homes the motor. If force is false (the default), then the homing
+operation is only performed, if the drive is not currently homed.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '76', 76)" onmouseover="showTip(event, '76', 76)">
+          <code onmouseout="hideTip(event, '60', 60)" onmouseover="showTip(event, '60', 60)">
             Pos
           </code>
-          <div class="tip" id="76">
+          <div class="tip" id="60">
             <strong>Signature:</strong> float<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L356-356" class="github-link">
+            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L366-366" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>The current motor position.</p>
+
+
               <p>CompiledName: <code>get_Pos</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '77', 77)" onmouseover="showTip(event, '77', 77)">
+          <code onmouseout="hideTip(event, '61', 61)" onmouseover="showTip(event, '61', 61)">
             Power(pwr)
           </code>
-          <div class="tip" id="77">
+          <div class="tip" id="61">
             <strong>Signature:</strong> pwr:bool -&gt; Async&lt;unit&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L370-370" class="github-link">
+            <a href="http://github.com/BRML/BRMLDrivers/tree/master/BRMLDrivers/Linmot.fs#L385-385" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Switches the motor power accordingly. (true=on, false=off)</p>
+
+
         </td>
       </tr>
     </tbody>
@@ -156,7 +189,7 @@
 
         </div>
         <div class="span3">
-          <!-- <img src="https://brml.github.io/BRMLDrivers//img/logo.png" alt="Deep.Net logo" style="width:150px;margin:10px" /> -->  
+          <!-- <img src="https://brml.github.io/BRMLDrivers//img/logo.png" alt="BRML Drivers logo" style="width:150px;margin:10px" /> -->  
           <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
             <li class="nav-header">BRML Drivers</li>
             <li><a href="https://brml.github.io/BRMLDrivers//index.html">Home page</a></li>
@@ -165,9 +198,13 @@
             <li><a href="http://github.com/BRML/BRMLDrivers">Source Code on GitHub</a></li>
             <li><a href="https://brml.github.io/BRMLDrivers//release-notes.html">Release Notes</a></li>
             
-            <li class="nav-header">Getting started</li>
-            <li><a href="https://brml.github.io/BRMLDrivers//tensor.html">Working with Tensors</a></li>
-            <li><a href="https://brml.github.io/BRMLDrivers//mnist.html">Learning MNIST</a></li>
+            <li class="nav-header">Data Recorder</li>
+            <li><a href="https://brml.github.io/BRMLDrivers//recorder-usage.html">Usage</a></li>
+
+            <li class="nav-header">Instrument Drivers</li>
+            <li><a href="https://brml.github.io/BRMLDrivers//linmot.html">Linmot</a></li>
+            <li><a href="https://brml.github.io/BRMLDrivers//xytable.html">XY table</a></li>
+            <li><a href="https://brml.github.io/BRMLDrivers//biotac.html">BioTac SP</a></li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="https://brml.github.io/BRMLDrivers//reference/index.html">API Reference</a></li>
