@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>XYTableT - BRML Drivers</title>
+    <title>Recorder<'S> - BRML Drivers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Technical University Munich"/>
@@ -38,13 +38,43 @@
 
 
 
-<h1>XYTableT</h1>
+<h1>Recorder<'S></h1>
 <p>
-  <span>Namespace: BRML.Drivers</span><br />
-  <span>Parent Module: <a href="brml-drivers-xytabletypes.html">XYTableTypes</a></span>
+  <span>Namespace: SampleRecorder</span><br />
+  <span>Parent Module: <a href="samplerecorder-recordertypes.html">RecorderTypes</a></span>
 </p>
 <div class="xmldoc">
+<p>Data recorder. Records samples of type 'S (must be a record type of ArrayNDHostTs) using
+the given sensors (must implemented the ISensor and ISensor<_> interfaces).</p>
+
 </div>
+  <h3>Constructors</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Constructor</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
+            new(sensors)
+          </code>
+          <div class="tip" id="105">
+            <strong>Signature:</strong> (sensors:ISensor list) -&gt; Recorder&lt;&#39;S&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/SampleRecorder/Recorder.fs#L108-108" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+              <p>CompiledName: <code>.ctor</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   <h3>Instance members</h3>
   <table class="table table-bordered member-list">
     <thead>
@@ -54,58 +84,104 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '99', 99)" onmouseover="showTip(event, '99', 99)">
-            CurrentPos
+          <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
+            Clear()
           </code>
-          <div class="tip" id="99">
-            <strong>Signature:</strong> float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L598-598" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_CurrentPos</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
-            PosAcquired
-          </code>
-          <div class="tip" id="100">
-            <strong>Signature:</strong> IEvent&lt;XYTupleT&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L602-602" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_PosAcquired</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
-            PosReportInterval()
-          </code>
-          <div class="tip" id="101">
+          <div class="tip" id="106">
             <strong>Signature:</strong> unit -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L625-625" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/SampleRecorder/Recorder.fs#L152-152" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
-              <p>CompiledName: <code>get_PosReportInterval</code></p>
+          <p>Clears all recorded data.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '107', 107)" onmouseover="showTip(event, '107', 107)">
+            GetSamples(interval)
+          </code>
+          <div class="tip" id="107">
+            <strong>Signature:</strong> (interval:float option) -&gt; seq&lt;&#39;S&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/SampleRecorder/Recorder.fs#L161-161" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Gets all recorded samples using the specified inter-sample interval using linear
+interpolation.
+If None is specified for the interval, then the average sampling interval of the
+fastest sensor is used.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '108', 108)" onmouseover="showTip(event, '108', 108)">
+            PrintStatistics()
+          </code>
+          <div class="tip" id="108">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/SampleRecorder/Recorder.fs#L201-201" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Prints recording statistics for all channels.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '109', 109)" onmouseover="showTip(event, '109', 109)">
+            Start()
+          </code>
+          <div class="tip" id="109">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/SampleRecorder/Recorder.fs#L141-141" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Starts recording.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '110', 110)" onmouseover="showTip(event, '110', 110)">
+            Stop()
+          </code>
+          <div class="tip" id="110">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/SampleRecorder/Recorder.fs#L147-147" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Stops recording.</p>
+
+
         </td>
       </tr>
     </tbody>

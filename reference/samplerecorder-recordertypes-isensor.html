@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>XYTableT - BRML Drivers</title>
+    <title>ISensor - BRML Drivers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Technical University Munich"/>
@@ -38,12 +38,14 @@
 
 
 
-<h1>XYTableT</h1>
+<h1>ISensor</h1>
 <p>
-  <span>Namespace: BRML.Drivers</span><br />
-  <span>Parent Module: <a href="brml-drivers-xytabletypes.html">XYTableTypes</a></span>
+  <span>Namespace: SampleRecorder</span><br />
+  <span>Parent Module: <a href="samplerecorder-recordertypes.html">RecorderTypes</a></span>
 </p>
 <div class="xmldoc">
+<p>Sensor interface.</p>
+
 </div>
   <h3>Instance members</h3>
   <table class="table table-bordered member-list">
@@ -54,58 +56,23 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '99', 99)" onmouseover="showTip(event, '99', 99)">
-            CurrentPos
+          <code onmouseout="hideTip(event, '102', 102)" onmouseover="showTip(event, '102', 102)">
+            DataType
           </code>
-          <div class="tip" id="99">
-            <strong>Signature:</strong> float&lt;MeasureOne&gt; * float&lt;MeasureOne&gt;<br />
+          <div class="tip" id="102">
+            <strong>Signature:</strong> Type<br />
+              <strong>Modifiers:</strong> abstract<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L598-598" class="github-link">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/SampleRecorder/Recorder.fs#L14-14" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
-              <p>CompiledName: <code>get_CurrentPos</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
+          <p>Data type of recorded data, e.g. single.</p>
 
-          <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
-            PosAcquired
-          </code>
-          <div class="tip" id="100">
-            <strong>Signature:</strong> IEvent&lt;XYTupleT&gt;<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L602-602" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_PosAcquired</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
 
-          <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
-            PosReportInterval()
-          </code>
-          <div class="tip" id="101">
-            <strong>Signature:</strong> unit -&gt; unit<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L625-625" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          
-              <p>CompiledName: <code>get_PosReportInterval</code></p>
+              <p>CompiledName: <code>get_DataType</code></p>
         </td>
       </tr>
     </tbody>
