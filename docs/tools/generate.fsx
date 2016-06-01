@@ -9,11 +9,11 @@
 // for binaries output to root bin folder please add the filename only to the 
 // referenceBinaries list below in order to generate documentation for the binaries.
 // (This is the original behaviour of ProjectScaffold prior to multi project support)
-let referenceBinaries = ["BRMLDrivers.dll"; ]
+let referenceBinaries = ["BRMLDrivers.dll"; "SampleRecorder.dll"]
 // Web site location for the generated documentation
-let website = "https://brml.github.io/BRMLDrivers/"
+let website = "https://brml.github.io/BRMLDrivers"
 
-let githubLink = "http://github.com/BRML/BRMLDrivers"
+let githubLink = "https://github.com/BRML/BRMLDrivers/tree/0.2"
 
 // Specify more information about your project
 let info =
