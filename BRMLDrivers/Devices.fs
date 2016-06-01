@@ -8,11 +8,11 @@ module Config =
             PortBaud       = 115200;
             X              = { StepperConfig = {Id=1; AnglePerStep=1.8; StepMode=8; StartVel=1000.;}
                                DegPerMM      = 360. / 1.25;
-                               Home          = Stepper.Right;
+                               Home          = StepperCfg.Right;
                                MaxPos        = 147.;}
             Y              = { StepperConfig = {Id=2; AnglePerStep=1.8; StepMode=8; StartVel=1000.;}
                                DegPerMM      = 360. / 1.25;
-                               Home          = Stepper.Left;
+                               Home          = StepperCfg.Left;
                                MaxPos        = 140.;}
             DefaultVel     = 30.;
             DefaultAccel   = 30.;

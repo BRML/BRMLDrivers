@@ -19,11 +19,11 @@ let cfg : XYTableCfgT = {
     PortBaud       = 115200
     X              = { StepperConfig = {Id=1; AnglePerStep=1.8; StepMode=8; StartVel=1000.}
                        DegPerMM      = 360. / 1.25
-                       Home          = Stepper.Right
+                       Home          = StepperCfg.Right
                        MaxPos        = 147. }
     Y              = { StepperConfig = {Id=2; AnglePerStep=1.8; StepMode=8; StartVel=1000.}
                        DegPerMM      = 360. / 1.25
-                       Home          = Stepper.Left
+                       Home          = StepperCfg.Left
                        MaxPos        = 140. }
     DefaultVel     = 30.
     DefaultAccel   = 30.
@@ -38,7 +38,7 @@ They are described as follows.
 `StepMode` is the stepping mode of the motor.
 `StartVel` is the initial velocity when starting the motor in steps per second.
 `DegPerMM` is how many degrees the motor must turn to move the table by $1\mathrm{mm}$.
-`Home` is the direction of the reference switch and can be `Stepper.Left` or `Stepper.Right`.
+`Home` is the direction of the reference switch and can be `StepperCfg.Left` or `StepperCfg.Right`.
 `MaxPos` is the maximum reachable position in $\mathrm{mm}$.
 `DefaultVel` is the default movement velocity in $\mathrm{mm}/\mathrm{s}$.
 `DefaultAccel` is the default acceleration and deceleration in $\mathrm{mm} / \mathrm{s}^2$.
@@ -54,8 +54,12 @@ let tbl = new XYTableT (cfg)
 Initialization and checking of communication is performed automatically.
 After initialization the driver starts to stream position samples from the XY table.
 
-All driver instance methods return an `Async<_>` instance.
+The driver has overshoot protection and will stop the XY table and terminate the program, if the position of any axis goes below 0 or above `MaxPos` specified in the configuration.
+Nevertheless, program and computer crashes can cause a dangerous situation; see the caution below.
+
+The `tbl.Home` and `tbl.DriveTo` instance methods return an `Async<_>` instance.
 You can perform [asynchronous control](https://fsharpforfunandprofit.com/posts/concurrency-async-and-parallel/) or pipe all results into the `Async.RunSynchronously` to perform immediate command execution and wait for the operation to finish before your program continues.
+
 
 Homing
 ------
@@ -98,36 +102,56 @@ Moving to a target position
 ---------------------------
 To move to a target position with a fixed velocity and linear acceleration and deceleration ramps use the `tbl.DriveTo` method.
 *)
-tbl.DriveTo ((50. (* mm *), 80. (* mm *)))
+tbl.DriveTo ((50. (* mm *), 80. (* mm *))) |> Async.RunSynchronously
 (**
 The first argument is the target XY position in $\mathrm{mm}$ as a tuple.
 
 You can specify additional arguments for the movement velocity, acceleration and deceleration.
 If they are omitted, the default values from the configuration are used.
 *)
-tbl.DriveTo ((10. (* mm *), 10. (* mm *)), (5. (* mm/s *), 5. (* mm/s *)), (10. (* mm/s^2 *), 10. (* mm/s^2 *)))
+tbl.DriveTo ((10. (* mm *), 10. (* mm *)), (5. (* mm/s *), 5. (* mm/s *)), (10. (* mm/s^2 *), 10. (* mm/s^2 *))) 
+|> Async.RunSynchronously
 
 (**
 
 Moving with a set velocity
 --------------------------
-It is also possible to directly control the movement velocity of the XY table.
+It is also possible to control the movement velocity of the XY table directly.
+This may be useful when the XY table is to be controlled in a closed loop mode of a larger system.
 
-
-
+To enable direct velocity control call the `tbl.DriveWithVel` method with the desired velocity in $\mathrm{mm}/\mathrm{s}$ as argument.
 *)
+tbl.DriveWithVel ((3. (* mm/s *), 5. (* mm/s *)))
+(** hide **)
+Async.Sleep 1000 |> Async.RunSynchronously
+(**
+Contrary to the rest of the driver interface, this method returns immediately with a unit return type.
+It does not wait for the XY table to reach the specified velocity.
 
+**CAUTION: If the program crashes in a disadvantageous way or the whole computer crashes or the communication is lost, *the XY table will continue to move* with the last set velocity and *crash into the stop*. The only way to stop it in such a situation, is to cut the power of the motor driver.**
 
+The movement velocity can be adjusted at any time by calling `tbl.DriveWithVel` again with the new velocity.
+Use negative velocities to reverse the movement direction.
+You can optionally specify an acceleration that should be used to acquire the new velocity.
+*)
+tbl.DriveWithVel ((-10. (* mm/s *), -20. (* mm/s *)), (7. (* mm/s^2 *), 7. (* mm/s^2 *)))
+
+(**
+To stop the table call the `tbl.Stop` method, optionally specifying the deceleration.
+*)
+tbl.Stop ()
+(**
+The method does not block until the XY table has stopped.
+*)
 
 (**
 Disposing
 ---------
 Dispose the driver instance after usage.
 *)
-//tbl.Dispose ()
+tbl.Dispose ()
 (**
 This will stop the table and release the serial port.
 *)
-
 
 
