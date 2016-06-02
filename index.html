@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>BRML Drivers and Data Recorder
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="BRML Instrument Drivers"/>
+    <meta name="author" content="Technical University Munich"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/content/style.css" />
+    <script type="text/javascript" src="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" async
+              src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="https://github.com/BRML/BRMLDrivers/tree/0.2">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/index.html">BRML Drivers</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1><a name="BRML-Drivers-and-Data-Recorder" class="anchor" href="#BRML-Drivers-and-Data-Recorder">BRML Drivers and Data Recorder</a></h1>
+<p>This F# library contains drivers for lab equipment and self-built robots at <a href="http://www.brml.org">BRML labs</a>.</p>
+<p>It also contains a <a href="recorder-usage.html">generic sample recorder class</a> for obtaining time-synchronized samples from sensors supported by this library as well as user-defined sensors.</p>
+<p>Currently the following hardware is supported:</p>
+<ul>
+<li><a href="linmot.html">Driver</a> for <a href="http://www.linmot.com/products/linear-motors/">Linmot</a> using the <a href="http://www.linmot.com/fileadmin/user_upload/Downloads/software-firmware/servo-drives/linmot-talk-6/Usermanual_LinRS_e_recent.pdf">LinRS serial protocol</a></li>
+<li><a href="xytable.html">Driver</a> for <a href="http://www.movtec.de/positioniersysteme/2-achsen-system.html">Movtec Wacht XY-table</a> using <a href="http://en.nanotec.com/products/1034-smci33-stepper-motor-controller-with-closed-loop-controller/">Nanotec stepper motor controller SMCI33</a> or compatible serial interface</li>
+<li><a href="biotac.html">Driver</a> for <a href="http://www.syntouchllc.com/Products/BioTac-SP/">Syntouch BioTac SP sensor</a> using a <a href="http://www.totalphase.com/products/cheetah-spi/">Cheetah SPI USB adapter</a></li>
+</ul>
+<p>See the documentation contents on the right side for individual topics.</p>
+<h2><a name="Installation" class="anchor" href="#Installation">Installation</a></h2>
+<p>This library is available on NuGet and can be installed using</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">Install</span><span class="o">-</span><span class="i">Package</span> <span class="i">BRMLDrivers</span>
+</code></pre></td>
+</tr>
+</table>
+<p>As an alternative you can also clone the <a href="https://github.com/BRML/BRMLDrivers">Git repository</a> and reference the <code>SampleRecorder</code> and <code>BRMLDrivers</code> projects in your projects.</p>
+<h2><a name="Contributing-and-copyright" class="anchor" href="#Contributing-and-copyright">Contributing and copyright</a></h2>
+<p>The project is hosted on <a href="https://github.com/BRML/BRMLDrivers">GitHub</a> where you can <a href="https://github.com/BRML/BRMLDrivers/issues">report issues</a>, fork the project and submit pull requests.
+The library is available under the <a href="https://github.com//BRML/BRMLDrivers/blob/master/LICENSE">Apache License 2.0</a>, which allows modification and redistribution for both commercial and non-commercial purposes.</p>
+
+
+        </div>
+        <div class="span3">
+          <!-- <img src="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/img/logo.png" alt="BRML Drivers logo" style="width:150px;margin:10px" /> -->  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">BRML Drivers</li>
+            <li><a href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/index.html">Home page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/BRMLDrivers">Get Library via NuGet</a></li>
+            <li><a href="https://github.com/BRML/BRMLDrivers/tree/0.2">Source Code on GitHub</a></li>
+            <li><a href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Data Recorder</li>
+            <li><a href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/recorder-usage.html">Usage</a></li>
+
+            <li class="nav-header">Instrument Drivers</li>
+            <li><a href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/linmot.html">Linmot</a></li>
+            <li><a href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/xytable.html">XY table</a></li>
+            <li><a href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/biotac.html">BioTac SP</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="file://Z:\dev\Deep\BRMLDrivers\docs\tools\../output/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="https://github.com/BRML/BRMLDrivers/tree/0.2"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>
