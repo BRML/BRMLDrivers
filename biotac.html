@@ -39,6 +39,7 @@
 <h1><a name="BioTac-SP-driver" class="anchor" href="#BioTac-SP-driver">BioTac SP driver</a></h1>
 <p>This driver reads samples of tactile data from a <a href="http://www.syntouchllc.com/Products/BioTac-SP/">Syntouch BioTac SP sensor</a> conntected to the PC using a <a href="http://www.totalphase.com/products/cheetah-spi/">Cheetah SPI/USB adapter</a>.</p>
 <p>Currently only reading out a single Biotac sensor is supported.</p>
+<p>This driver implements the sensor interface of the <a href="recorder-usage.fsx">generic data recorder</a> and thus a driver instance can be passed directly to the recorder as a sensor.</p>
 <h2><a name="Installation" class="anchor" href="#Installation">Installation</a></h2>
 <p>Make sure that the <a href="http://www.totalphase.com/products/usb-drivers-windows/">system driver</a> for the Cheetah SPI/USB adapter is properly installed.</p>
 <h2><a name="Driver-configuration" class="anchor" href="#Driver-configuration">Driver configuration</a></h2>
