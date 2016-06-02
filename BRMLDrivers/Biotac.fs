@@ -264,7 +264,7 @@ module Biotac =
 
         override this.Finalize() = this.Dispose()
 
-        interface SampleRecorder.RecorderTypes.ISensor<BioTacValueT []> with
+        interface SampleRecorder.ISensor<BioTacValueT []> with
             member this.DataType = typeof<BioTacValueT []>
             member this.SampleAcquired =
                 this.SampleAcquired
