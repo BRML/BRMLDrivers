@@ -8,6 +8,8 @@ Movtec XY table driver
 
 This driver controls a [Movtec Wacht XY-table](http://www.movtec.de/positioniersysteme/2-achsen-system.html) using a [Nanotec stepper motor controller SMCI33](http://en.nanotec.com/products/1034-smci33-stepper-motor-controller-with-closed-loop-controller/) or compatible serial interface.
 
+This driver implements the sensor interface of the [generic data recorder](recorder-usage.fsx) and thus a driver instance can be passed directly to the recorder as a sensor.
+
 Driver configuration
 --------------------
 Instantiating the driver requires providing a configuration record of type `BRML.Drivers.BioTacCfgT`.

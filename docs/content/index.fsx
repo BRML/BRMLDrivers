@@ -3,7 +3,8 @@ BRML Drivers and Data Recorder
 ==============================
 
 This F# library contains drivers for lab equipment and self-built robots at [BRML labs](http://www.brml.org).
-It also contains a [generic sample recorder class](recorder-usage.html) for obtaining time-synchronized samples from arbitrary sensors.
+
+It also contains a [generic sample recorder class](recorder-usage.html) for obtaining time-synchronized samples from sensors supported by this library as well as user-defined sensors.
 
 Currently the following hardware is supported:
 
@@ -18,6 +19,8 @@ Installation
 This library is available on NuGet and can be installed using
 
     Install-Package BRMLDrivers
+
+As an alternative you can also clone the [Git repository][gh] and reference the `SampleRecorder` and `BRMLDrivers` projects in your projects.
 
 
 Contributing and copyright 
