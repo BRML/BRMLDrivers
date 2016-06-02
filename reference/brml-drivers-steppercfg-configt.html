@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Namespaces - BRML Drivers</title>
+    <title>ConfigT - BRML Drivers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Technical University Munich"/>
@@ -36,94 +36,105 @@
         <div class="span9" id="main">
           
 
-<h1>BRML Drivers</h1>
 
 
-  <h2>BRML.Drivers Namespace</h2>
-    <div>
-      <table class="table table-bordered module-list">
+<h1>ConfigT</h1>
+<p>
+  <span>Namespace: BRML.Drivers</span><br />
+  <span>Parent Module: <a href="brml-drivers-steppercfg.html">StepperCfg</a></span>
+</p>
+<div class="xmldoc">
+<p>Stepper motor configuration.</p>
+
+</div>
+  <h3>Record Fields</h3>
+  <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Module</td><td>Description</td></tr>
+      <tr><td>Record Field</td><td>Description</td></tr>
     </thead>
     <tbody>
-        <tr>
-          <td class="module-name">
-            <a href="brml-drivers-biotac.html">Biotac</a>
-          </td>
-          <td class="xmldoc"><p>Module containing the Biotac driver</p>
+      <tr>
+        <td class="member-name">
 
-</td>
-        </tr>
-        <tr>
-          <td class="module-name">
-            <a href="brml-drivers-linmot.html">Linmot</a>
-          </td>
-          <td class="xmldoc"><p>Module containing the Linmot driver and configuration</p>
+          <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
+            AnglePerStep
+          </code>
+          <div class="tip" id="22">
+            <strong>Signature:</strong> float<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L22-22" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>angle in degree per motor step</p>
 
-</td>
-        </tr>
-        <tr>
-          <td class="module-name">
-            <a href="brml-drivers-steppercfg.html">StepperCfg</a>
-          </td>
-          <td class="xmldoc"><p>Module for Nanotec SMCI33 stepper driver configuration.</p>
 
-</td>
-        </tr>
-        <tr>
-          <td class="module-name">
-            <a href="brml-drivers-xytable.html">XYTable</a>
-          </td>
-          <td class="xmldoc"><p>Module containing the driver for the Movtec XY table.</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
 
-</td>
-        </tr>
-        <tr>
-          <td class="module-name">
-            <a href="brml-drivers-xytabletypes.html">XYTableTypes</a>
-          </td>
-          <td class="xmldoc"></td>
-        </tr>
+          <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
+            Id
+          </code>
+          <div class="tip" id="23">
+            <strong>Signature:</strong> StepperIdT<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L20-20" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>motor ID</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
+            StartVel
+          </code>
+          <div class="tip" id="24">
+            <strong>Signature:</strong> float<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L26-26" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>start velocity in steps per second</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
+            StepMode
+          </code>
+          <div class="tip" id="25">
+            <strong>Signature:</strong> int<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/XYTable.fs#L24-24" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>stepping mode</p>
+
+
+        </td>
+      </tr>
     </tbody>
   </table>
-
-    </div>
-  <h2>SampleRecorder Namespace</h2>
-    <div>
-      <table class="table table-bordered type-list">
-    <thead>
-      <tr><td>Type</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td class="type-name">
-            <a href="samplerecorder-isensor-1.html">ISensor<'T></a>
-          </td>
-          <td class="xmldoc"><p>Sensor interface.</p>
-
-</td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="samplerecorder-isensor.html">ISensor</a>
-          </td>
-          <td class="xmldoc"><p>Sensor interface.</p>
-
-</td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="samplerecorder-recorder-1.html">Recorder<'S></a>
-          </td>
-          <td class="xmldoc"><p>Data recorder. Records samples of type 'S (must be a record type of ArrayNDHostTs) using
-the given sensors (must implemented the ISensor and ISensor<_> interfaces).</p>
-
-</td>
-        </tr>
-    </tbody>
-  </table>
-
-    </div>
 
         </div>
         <div class="span3">

@@ -2,10 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Release notes
-</title>
+    <title>BioTacSampleT - BRML Drivers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="BRML Instrument Drivers"/>
+    <meta name="description" content=""/>
     <meta name="author" content="Technical University Munich"/>
 
     <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
@@ -36,12 +35,66 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Release-notes" class="anchor" href="#Release-notes">Release notes</a></h1>
-<h2><a name="Version-0-2" class="anchor" href="#Version-0-2">Version 0.2</a></h2>
-<ul>
-<li>initial release</li>
-</ul>
 
+
+
+<h1>BioTacSampleT</h1>
+<p>
+  <span>Namespace: BRML.Drivers</span><br />
+  <span>Parent Module: <a href="brml-drivers-biotac.html">Biotac</a></span>
+</p>
+<div class="xmldoc">
+<p>A data sample obtained from the Biotac sensor.</p>
+
+</div>
+  <h3>Record Fields</h3>
+  <table class="table table-bordered member-list">
+    <thead>
+      <tr><td>Record Field</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '3', 3)" onmouseover="showTip(event, '3', 3)">
+            ByChannel
+          </code>
+          <div class="tip" id="3">
+            <strong>Signature:</strong> Map&lt;BioTacChannelT,BioTacValueT&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/Biotac.fs#L68-68" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sensor values by channel number (refer to Biotac documentation)</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '4', 4)" onmouseover="showTip(event, '4', 4)">
+            Flat
+          </code>
+          <div class="tip" id="4">
+            <strong>Signature:</strong> BioTacValueT []<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/BRML/BRMLDrivers/tree/0.2/tree/master/BRMLDrivers/Biotac.fs#L66-66" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Sensor values in a flat array.</p>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
         </div>
         <div class="span3">
