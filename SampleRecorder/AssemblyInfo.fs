@@ -7,11 +7,11 @@ open System.Runtime.InteropServices
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[<assembly: AssemblyTitle("SampleRecorder")>]
-[<assembly: AssemblyDescription("")>]
+[<assembly: AssemblyTitle("Generic Data Recorder")>]
+[<assembly: AssemblyDescription("Generic data recorder library for obtaining time-synchronized samples from arbitrary sensors.")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("Technical University Munich")>]
-[<assembly: AssemblyProduct("SampleRecorder")>]
+[<assembly: AssemblyProduct("BRML Instrument Drivers")>]
 [<assembly: AssemblyCopyright("Copyright © Technical University Munich")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyCulture("")>]

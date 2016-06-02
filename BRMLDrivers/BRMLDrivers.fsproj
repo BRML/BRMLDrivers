@@ -56,7 +56,6 @@
     <Compile Include="XYTable.fs" />
     <Compile Include="Linmot.fs" />
     <Compile Include="Biotac.fs" />
-    <Compile Include="Devices.fs" />
     <None Include="build\cheetah.dll">
       <Link>cheetah.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

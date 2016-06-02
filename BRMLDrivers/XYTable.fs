@@ -704,7 +704,7 @@ module XYTable =
 
         override this.Finalize() = this.Dispose()
 
-        interface SampleRecorder.RecorderTypes.ISensor<XYTupleT> with
+        interface SampleRecorder.ISensor<XYTupleT> with
             member this.DataType = typeof<XYTupleT>
             member this.SampleAcquired = this.PosAcquired
             member this.Interpolate fac a b =
