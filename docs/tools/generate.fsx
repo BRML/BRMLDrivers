@@ -9,20 +9,19 @@
 // for binaries output to root bin folder please add the filename only to the 
 // referenceBinaries list below in order to generate documentation for the binaries.
 // (This is the original behaviour of ProjectScaffold prior to multi project support)
-let referenceBinaries = ["DeepNet.dll"; "MLDatasets.dll"; "MLModels.dll"; "MLOptimizers.dll";
-                         "SymTensor.dll"; "SymTensorCuda.dll"; "Tensor.dll"]
+let referenceBinaries = ["BRMLDrivers.dll"; "SampleRecorder.dll"]
 // Web site location for the generated documentation
-let website = "http://www.deepml.net"
+let website = "https://brml.github.io/BRMLDrivers"
 
-let githubLink = "http://github.com/DeepMLNet/DeepNet"
+let githubLink = "https://github.com/BRML/BRMLDrivers/tree/0.2"
 
 // Specify more information about your project
 let info =
-  [ "project-name", "Deep.Net"
-    "project-author", "Deep.Net developers"
-    "project-summary", "Deep.Net machine learning framework"
+  [ "project-name", "BRML Drivers"
+    "project-author", "Technical University Munich"
+    "project-summary", "BRML Instrument Drivers"
     "project-github", githubLink
-    "project-nuget", "http://nuget.org/packages/DeepNet" ]
+    "project-nuget", "http://nuget.org/packages/BRMLDrivers" ]
 
 // --------------------------------------------------------------------------------------
 // For typical project, no changes are needed below
@@ -48,7 +47,7 @@ let compilerOptions = ""
 #endif
 
 // Paths with template/source/output locations
-let bin        = __SOURCE_DIRECTORY__ @@ "../../DeepNet/bin/Release"
+let bin        = __SOURCE_DIRECTORY__ @@ "../../BRMLDrivers/bin/Release"
 let content    = __SOURCE_DIRECTORY__ @@ "../content"
 let output     = __SOURCE_DIRECTORY__ @@ "../output"
 let files      = __SOURCE_DIRECTORY__ @@ "../files"

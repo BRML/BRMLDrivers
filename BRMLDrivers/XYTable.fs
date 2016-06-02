@@ -8,20 +8,39 @@ open System.Text.RegularExpressions
 open System.Diagnostics
 
 
-/// low-level driver for RS485 Nanotec stepper motor drivers
-module Stepper =
+/// Module for Nanotec SMCI33 stepper driver configuration.
+module StepperCfg =
+
+    /// Stepper motor id type.
+    type StepperIdT = int
+
+    /// Stepper motor configuration.
+    type ConfigT = {
+        /// motor ID
+        Id:             StepperIdT
+        /// angle in degree per motor step
+        AnglePerStep:   float
+        /// stepping mode
+        StepMode:       int   
+        /// start velocity in steps per second
+        StartVel:       float
+    }
+
+    /// Movement direction.
+    type DirectionT =
+        /// left
+        | Left
+        /// right
+        | Right
+
+
+/// Module for low-level driver for Nanotec SMCI33 stepper motor driver.
+module internal Stepper =
+
+    open StepperCfg
 
     [<Literal>]
     let Debug = false
-
-    type StepperIdT = int
-
-    type ConfigT = {
-        Id:             StepperIdT;
-        AnglePerStep:   float;
-        StepMode:       int;    
-        StartVel:       float;
-    }
 
     type StepperT = 
         {Port:           SerialPort;
@@ -44,11 +63,6 @@ module Stepper =
         | Absolute
         | ExternalReferencing
         | Velocity
-
-    type DirectionT =
-        | Left
-        | Right
-
 
     type private MsgT = Msg of string * int option
         
@@ -241,25 +255,40 @@ module Stepper =
         start stepper
 
 
+/// Module containing the driver for the Movtec XY table.
 module XYTable =
 
+    /// XY table axis configuration
     type AxisConfigT = {
-        StepperConfig:  Stepper.ConfigT;
-        DegPerMM:       float;
-        Home:           Stepper.DirectionT;
-        MaxPos:         float;
+        /// stepper motor configuration associated with this axis
+        StepperConfig:  StepperCfg.ConfigT
+        /// rotations in degree to move the table by 1 mm
+        DegPerMM:       float
+        /// home position side (StepperCfg.Left or StepperCfg.Right)
+        Home:           StepperCfg.DirectionT
+        /// maximum position in mm
+        MaxPos:         float
     }
 
+    /// XY table configuration
     type XYTableConfigT = {
-        PortName:       string;
+        /// serial port name
+        PortName:       string
+        /// serial port baud rate
         PortBaud:       int;
-        X:              AxisConfigT;
-        Y:              AxisConfigT;
-        DefaultVel:     float;
+        /// X axis configuration
+        X:              AxisConfigT
+        /// Y axis configuration
+        Y:              AxisConfigT
+        /// default velocity in mm/s
+        DefaultVel:     float
+        /// default acceleration in mm/s^2
         DefaultAccel:   float;
-        HomeVel:        float;
+        /// homing velocity in mm/2
+        HomeVel:        float
     }
 
+    /// an XY position/velocity/acceleration
     type XYTupleT = float * float
 
     type private MsgT =
@@ -279,6 +308,7 @@ module XYTable =
         | Query
         | Simulate
 
+    /// Driver for Movtec XY table.
     type XYTableT (config: XYTableConfigT) =
         inherit System.Runtime.ConstrainedExecution.CriticalFinalizerObject()
 
@@ -343,8 +373,8 @@ module XYTable =
 
         let fetchPos () = 
             let xPos, yPos = Stepper.getPos xStepper, Stepper.getPos yStepper
-            let xPos = if config.X.Home = Stepper.Right then -xPos else xPos
-            let yPos = if config.Y.Home = Stepper.Right then -yPos else yPos
+            let xPos = if config.X.Home = StepperCfg.Right then -xPos else xPos
+            let yPos = if config.Y.Home = StepperCfg.Right then -yPos else yPos
             xPos / config.X.DegPerMM, yPos / config.Y.DegPerMM
 
         let fetchStatus () =
@@ -505,8 +535,8 @@ module XYTable =
                             if not (posInRange pos) then rc.Reply ReplyOutOfRange
                             if not homed then rc.Reply ReplyNotHomed
                             else 
-                                let xpos = if config.X.Home = Stepper.Right then -xpos else xpos
-                                let ypos = if config.Y.Home = Stepper.Right then -ypos else ypos
+                                let xpos = if config.X.Home = StepperCfg.Right then -xpos else xpos
+                                let ypos = if config.Y.Home = StepperCfg.Right then -ypos else ypos
                                 lock port (fun () ->
                                     Stepper.enableEcho xStepper; Stepper.disableEcho yStepper                                        
                                     Stepper.driveTo (xDeg xpos) (xDeg xvel) (xDeg xaccel) (xDeg xdecel) xStepper
@@ -519,8 +549,8 @@ module XYTable =
                             if not homed then rc.Reply ReplyNotHomed
                             else
                                 let minVel = 0.001
-                                let cntrlXvel = if config.X.Home = Stepper.Right then -xvel else xvel
-                                let cntrlYvel = if config.Y.Home = Stepper.Right then -yvel else yvel
+                                let cntrlXvel = if config.X.Home = StepperCfg.Right then -xvel else xvel
+                                let cntrlYvel = if config.Y.Home = StepperCfg.Right then -yvel else yvel
                                 let cntrlXvel = if abs cntrlXvel < minVel then minVel else cntrlXvel
                                 let cntrlYvel = if abs cntrlYvel < minVel then minVel else cntrlYvel
                                 let cntrlVel = cntrlXvel, cntrlYvel
@@ -595,32 +625,46 @@ module XYTable =
             AppDomain.CurrentDomain.DomainUnload.Add(fun _ -> terminate())
             Console.CancelKeyPress.Add(fun _ -> terminate())
 
+        /// The latest available position.
         member this.CurrentPos = 
             if trackMode = Simulate then simulateToNow ()
             currentPos
 
+        /// This event is raised, when a new position sample is acquired.
         member this.PosAcquired = posAcquired.Publish
 
+        /// Waits for the next position sample and returns it.
         member this.GetNextPos () =
             Async.AwaitEvent (this.PosAcquired) |> Async.RunSynchronously
         
+        /// Homes the XY table, if it is currently not homed.
         member this.Home() = 
             postMsg (MsgHome)
 
+        /// Drives to the specified position.
+        /// Optionally drive velocity, acceleration and deceleration can be specified.
+        /// Acceleration and deceleration is performed using a linear ramp.
         member this.DriveTo (pos, ?vel, ?accel, ?decel) = 
             let vel = defaultArg vel (config.DefaultVel, config.DefaultVel)
             let accel = defaultArg accel (config.DefaultAccel, config.DefaultAccel)
             let decel = defaultArg decel (config.DefaultAccel, config.DefaultAccel)
             postMsg (MsgDriveTo (pos, vel, accel, decel))
 
+        /// Starts driving with the specified velocity.
+        /// Use negative velocities to move in the opposite direction.
+        /// The acceleration is performed linearly to the target velocity.
+        /// This method may be called repetitively (without stopping the table in-between)
+        /// to adjust the movement velocity.
         member this.DriveWithVel (vel, ?accel) = 
             let accel = defaultArg accel (config.DefaultAccel, config.DefaultAccel)
             postMsg (MsgDriveWithVel (vel, accel)) |> Async.RunSynchronously
 
-        member this.Stop (?accel) = 
-            let accel = defaultArg accel (config.DefaultAccel, config.DefaultAccel)       
-            postMsg (MsgStop (accel)) |> Async.RunSynchronously
+        /// Stops the XY table with the optionally specified deceleration.
+        member this.Stop (?decel) = 
+            let decel = defaultArg decel (config.DefaultAccel, config.DefaultAccel)       
+            postMsg (MsgStop (decel)) |> Async.RunSynchronously
 
+        /// Position reporting interval in ms.
         member this.PosReportInterval 
             with get () = posReportInterval
             and set value = 
@@ -647,15 +691,18 @@ module XYTable =
             let vy = XYTableT.OptimalVelAxis tPosY posY maxAccel maxVel 
             vx, vy
 
-
-        interface IDisposable with
-            member this.Dispose () =
+        /// Stops the table, releases the serial port and disposes the 
+        /// driver instance.
+        member this.Dispose () =
+            if not disposed then
                 terminate ()
                 port.Dispose()
                 disposed <- true
 
-        override this.Finalize() =
-            terminate ()
+        interface IDisposable with
+            member this.Dispose () = this.Dispose ()
+
+        override this.Finalize() = this.Dispose()
 
         interface SampleRecorder.RecorderTypes.ISensor<XYTupleT> with
             member this.DataType = typeof<XYTupleT>

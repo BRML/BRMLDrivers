@@ -10,7 +10,8 @@ Currently the following hardware is supported:
   * Movtec Wacht xy-table using a Nanotec stepper motor controller
   * Syntouch Biotac sensors using a Cheetah SPI USB adapter
 
-Documentation and sample code is available at https://brmldrivers.github.io
+Documentation and sample code is available at https://brml.github.io/BRMLDrivers
+
 
 
 

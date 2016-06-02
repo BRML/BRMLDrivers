@@ -6,7 +6,7 @@ open System.IO.Ports
 open System.Threading
 
 
-module LinmotIF =
+module private LinmotIF =
 
     [<Literal>]
     let Debug = false
@@ -237,17 +237,24 @@ module LinmotIF =
         sendMsg dataGen linmot
         recvResp parseDefaultResponse linmot |> ignore
    
-      
+
+/// Module containing the Linmot driver and configuration
 [<AutoOpen>]
 module Linmot =  
     open LinmotIF
 
+    /// Linmot configuration
     type LinmotCfgT = {
-        PortName:           string;
-        PortBaud:           int;
-        Id:                 int;    
-        DefaultVel:         float;
-        DefaultAccel:       float;
+        /// LinRS serial port name
+        PortName:           string
+        /// LinRS serial port baud rate
+        PortBaud:           int
+        /// Linmot drive id
+        Id:                 int   
+        /// default velocity
+        DefaultVel:         float
+        /// default acceleration and deceleration
+        DefaultAccel:       float
     }
 
     type private MsgT =
@@ -263,6 +270,8 @@ module Linmot =
 
     type private MsgWithReplyT = MsgT * AsyncReplyChannel<ReplyT>
 
+    /// Linmot driver.
+    /// The driver is fully thread-safe.
     type LinmotT (config: LinmotCfgT) =
 
         let linmot = {
@@ -353,27 +362,39 @@ module Linmot =
         // initialize in background
         do postMsg MsgInit |> Async.Start
 
+        /// The current motor position.
         member this.Pos = 
             let sts, _ = currentStatus
             sts.Pos
 
+        /// Homes the motor. If force is false (the default), then the homing
+        /// operation is only performed, if the drive is not currently homed.
         member this.Home (?force) =     
             let force = defaultArg force false
             postMsg (MsgHome force)
 
+        /// Drives to the specified position with the specified velocity
+        /// using the specified linear acceleration and deceleration.
         member this.DriveTo (pos, ?vel, ?accel, ?decel) =
             let vel = defaultArg vel config.DefaultVel
             let accel = defaultArg accel config.DefaultAccel
             let decel = defaultArg decel config.DefaultAccel
             postMsg (MsgDriveTo(pos, vel, accel, decel))
 
+        /// Switches the motor power accordingly. (true=on, false=off)
         member this.Power pwr = postMsg (MsgPower pwr)
 
+        /// Dispose the driver and close the serial port.
+        member this.Dispose () =
+            statusThreadShouldRun <- false
+            statusThread.Join()
+            linmot.Port.Dispose()
+
         interface IDisposable with
-            member this.Dispose () =
-                statusThreadShouldRun <- false
-                statusThread.Join()
-                linmot.Port.Dispose()
+            member this.Dispose () = this.Dispose()
+
+        override this.Finalize() = this.Dispose()
+
 
 
 

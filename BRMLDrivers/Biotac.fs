@@ -1,14 +1,12 @@
 ﻿namespace BRML.Drivers
-//#nowarn "9"
 
 open System
 open System.Threading
-//open System.Runtime.InteropServices
 
 open TotalPhase
 
 
-module Cheetah =
+module internal Cheetah =
 
     [<Literal>]
     let MaxDevices = 16
@@ -53,23 +51,33 @@ module Cheetah =
 
 
 
+/// Module containing the Biotac driver
 [<AutoOpen>]
 module Biotac =
 
+    /// Biotac channel data type
     type BioTacChannelT = int
+    /// Biotac sensor value data type
     type BioTacValueT = float
 
+    /// A data sample obtained from the Biotac sensor.
     type BioTacSampleT = {
+        /// Sensor values in a flat array.
         Flat:           BioTacValueT []
+        /// Sensor values by channel number (refer to Biotac documentation)
         ByChannel:      Map<BioTacChannelT, BioTacValueT>
     }
 
+    /// Biotac driver configuration.
     type BioTacCfgT = {
+        /// The unique id (UID) of the Cheetah SPI/USB adapter the Biotac is connected to.
         Cheetah:        Cheetah.Uid
+        /// The port the Biotac is connected to on the multiplexer.
+        /// Can be 0, 1 or 2.
         Index:          int
     }
 
-    /// Biotac sensor
+    /// Biotac sensor driver
     type BiotacT (config: BioTacCfgT) =
 
         let SpiBitrate =        4400          // kHz
@@ -229,27 +237,32 @@ module Biotac =
         do acquisitionThread.IsBackground <- true
         do acquisitionThread.Start()
             
-        /// a new sample has been acquired
+        /// Event that is raised, when a new sensor sample has been acquired.
         member this.SampleAcquired = sampleAcquired.Publish
 
-        /// the current sample
+        /// The latest acquired sensor sample.
         member this.CurrentSample =
             if not acquisitionEnabled then failwith "Biotac has been disposed"
             match currentSample with
             | Some smpl -> smpl
             | None -> Async.AwaitEvent (this.SampleAcquired) |> Async.RunSynchronously
 
-        /// the next fresh sample
+        /// Waits for the next sensor sample and returns it.
         member this.GetNextSample () =
             Async.AwaitEvent (this.SampleAcquired) |> Async.RunSynchronously
 
-        /// Biotac serial number
+        /// Biotac serial number.
         member this.Serial = serial
 
+        /// Disposes the driver instance.
+        member this.Dispose() =               
+            acquisitionEnabled <- false
+            acquisitionThread.Join()
+
         interface IDisposable with
-            member this.Dispose() =               
-                acquisitionEnabled <- false
-                acquisitionThread.Join()
+            member this.Dispose() = this.Dispose()
+
+        override this.Finalize() = this.Dispose()
 
         interface SampleRecorder.RecorderTypes.ISensor<BioTacValueT []> with
             member this.DataType = typeof<BioTacValueT []>
